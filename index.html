@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MsgScript Introduction</title>
+</head>
+<body>
+  <h1>Welcome to MsgScript Introduction</h1>
+
+  <p>
+    MsgScript is a simple scripting language that allows you to execute various actions based on commands.
+    The commands follow the format: <code>action:message</code>.
+  </p>
+
+  <p>Supported Actions:</p>
+  <ul>
+    <li><code>print:message</code> - Print the message to the console.</li>
+    <li><code>console.print:message</code> - Print the message to the console with a prefix.</li>
+    <li><code>innerhtml:message</code> - Append the message to the body of the document.</li>
+    <li><code>alert:message</code> - Show an alert with the given message.</li>
+  </ul>
+
+  <label for="messageInput">Enter MsgScript Command:</label>
+  <input type="text" id="messageInput" placeholder="action:message">
+  <button onclick="executeMessage()">Execute</button>
+
+  <script>
+    function executeMsgScript(command) {
+      const commands = command.split(':');
+      const action = commands[0].trim();
+      const message = commands[1].trim();
+
+      switch (action) {
+        case 'print':
+          console.log(message);
+          break;
+        case 'console.print':
+          console.log('Console Print:', message);
+          break;
+        case 'innerhtml':
+          document.body.innerHTML += message;
+          break;
+        case 'alert':
+          alert(message);
+          break;
+        default:
+          console.error('Unknown action:', action);
+      }
+    }
+
+    function executeMessage() {
+      const inputElement = document.getElementById('messageInput');
+      const command = inputElement.value;
+      executeMsgScript(command);
+    }
+  </script>
+</body>
+</html>
